@@ -11,7 +11,6 @@ class Television:
         self._muted = False  # Television is initially not muted
         self._volume = self.MIN_VOLUME  # Initial volume is set to minimum
         self._channel = self.MIN_CHANNEL  # Initial channel is set to minimum
-        self._previous_volume = self._volume  # Save previous volume for muting
     
     def power(self) -> None:
         # Toggle power status
@@ -35,12 +34,12 @@ class Television:
     def channel_up(self) -> None:
         # Increase channel if TV is on
         if self._status:
-            self._channel = (self._channel + 1) % (self.MAX_CHANNEL + 1)
+            self._channel = (self._channel + 1) % (Television.MAX_CHANNEL + 1)
     
     def channel_down(self) -> None:
         # Decrease channel if TV is on
         if self._status:
-            self._channel = (self._channel - 1) % (self.MAX_CHANNEL + 1)
+            self._channel = (self._channel - 1) % (Television.MAX_CHANNEL + 1)
     
     def volume_up(self) -> None:
         # Increase volume if TV is on and unmute TV if muted
@@ -48,7 +47,7 @@ class Television:
             if self._muted:
                 self._muted = False
                 self._volume = self._previous_volume
-            if self._volume < self.MAX_VOLUME:
+            if self._volume < Television.MAX_VOLUME:
                 self._volume += 1
     
     def volume_down(self) -> None:
@@ -57,7 +56,7 @@ class Television:
             if self._muted:
                 self._muted = False
                 self._volume = self._previous_volume
-            if self._volume > self.MIN_VOLUME:
+            if self._volume > Television.MIN_VOLUME:
                 self._volume -= 1
     
     def __str__(self) -> str:
